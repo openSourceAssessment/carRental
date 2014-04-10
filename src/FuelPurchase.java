@@ -12,5 +12,5 @@ public class FuelPurchase {
 
 	public void setFuelEconomy(double fuelEconomy) {
 		this.fuelEconomy = fuelEconomy;
-	}
+	}	
 }

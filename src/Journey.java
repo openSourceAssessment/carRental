@@ -1,7 +1,7 @@
 
 public class Journey {
 	private static final int	SERVICE_KILOMETER_LIMIT	= 100;
-	private double				kilometers;
+	double				kilometers;
 
 	/**
 	 * Class constructor
@@ -9,14 +9,22 @@ public class Journey {
 	public Journey() {
 		this.kilometers = 0;
 	}
+	
+	/** Jinho
+	 * Class constructor
+	 * @param kilometers
+	 */
+	public Journey(double kilometers) {
+		this.kilometers = kilometers;
+	}
 
 	/**
 	 * Appends the distance parameter to {@link #kilometers}
 	 * @param kilometers the distance traveled 
 	 */
 	public void addKilometers(double kilometers) {
-		System.err.println(this.kilometers);
-		System.err.println(kilometers);
+		//System.err.println(this.kilometers);
+		//System.err.println(kilometers);
 		this.kilometers += kilometers;
 	}
 
