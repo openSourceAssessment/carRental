@@ -14,12 +14,11 @@ public class Vehicle {
 	 * Class constructor
 	 */
 	public Vehicle() {
-		System.out.println("Vehicle object");
 		this.manufacturer = "Central";
 		this.model = "ITWEB";
 		this.makeYear = 2014;
 		journey = new Journey();
-		fuelPurchase = new FuelPurchase(125.6);
+		fuelPurchase = new FuelPurchase(0, 0);
 		service = new Service(journey.getKilometers(), journey.getTotalServices());		
 	}
 
@@ -32,12 +31,11 @@ public class Vehicle {
 	 * @param makeYear
 	 */
 	public Vehicle(String manufacturer, String model, int makeYear) {
-		System.out.println("Vehicle object");
 		this.manufacturer = manufacturer;
 		this.model = model;
 		this.makeYear = makeYear;
 		journey = new Journey();
-		fuelPurchase = new FuelPurchase(125.6);
+		fuelPurchase = new FuelPurchase(62, 75);
 		service = new Service(journey.getKilometers(), journey.getTotalServices());
 	}
 	
@@ -59,17 +57,27 @@ public class Vehicle {
 		service = new Service(journey.getKilometers(), journey.getTotalServices());
 	}
 
-	/**
+	/** Luna update print details
 	 * Prints details for {@link Vehicle}
 	 */
 	public void printDetails() {
-		System.out.println("Manufacturer: " + manufacturer);
-		System.out.println("Model: " + model);
-		System.out.println("Make Year: " + makeYear);
-		System.out.println("Total Kilometers Travelled: " + journey.getKilometers());
-		System.out.println("Total Services: " + journey.getTotalServices());
+		System.out.println("Vehicle: " + manufacturer + " " + model + " (" + makeYear + " model)");
+				
+		if(journey.getKilometers() == 0){
+			
+			System.out.println(journey.getKilometers() + "km travelled requiring 0 litres of fuel at a cost of $0");
+			System.out.println("No travel has been recorded yet.");
+			System.out.println("No fuel has been purchased yet.");
+			
+		} else {
+			
+			System.out.println(journey.getKilometers() + "km travelled requiring " + fuelPurchase.getFuelLiters() 
+					+ " litres of fuel at a cost of $" + fuelPurchase.getFuelCost());			
+			System.out.printf("This vehicle achieved a fuel economy of %.1f litres/100km.\n", (fuelPurchase.getFuelLiters()*100)/journey.getKilometers());
+			System.out.println("The vehicle shoud have undergone " + journey.getTotalServices() + " service(s).");
+			System.out.printf("The average cost of fuel was $ %.2f per litre.\n", fuelPurchase.getFuelCost()/fuelPurchase.getFuelLiters());
+		}		
 		System.out.println();
-		printServie();
 	}
 
 	/**
@@ -82,30 +90,7 @@ public class Vehicle {
 		journey.addKilometers(distance);
 		service.setCurrentKm(journey.getKilometers());
 	}
-	
-	public void printServie(){
-		if(journey.getKilometers() > service.getLastServiceKm()){
-			System.out.println("Error: Vehicle must be serviced first");
-		}
-		
-		System.out.println("Vehicle: " + this.manufacturer + " " + this.model + " (" + this.makeYear + " model)");
-		
-		if(journey.getKilometers() == 0){
-			System.out.println("No travel has been recorded yet.");
-			System.out.println("The vehicle has not yet been serviced.");
-			
-		} else {
-			if(journey.getKilometers() == service.getLastServiceKm()){
-				System.out.println(journey.getKilometers() + "km travelled raising " );
-				System.out.println("The vehicle was last serviced at " + service.getLastServiceKm() + "km.");				
-			} else {
-				System.out.println(journey.getKilometers() + "km travelled raising " );
-				System.out.println("The vehicle has not yet been serviced.");	
-			}					
-		}
-		System.out.println();
-	}
-	
+
 	public void vehicleService(){
 		service.serviceKm(journey.getTotalServices());
 	}

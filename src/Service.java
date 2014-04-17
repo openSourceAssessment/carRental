@@ -9,7 +9,7 @@ public class Service {
 	 */
 	public Service(double currentKm, int serviceTimes){
 		this.currentKm = currentKm;	
-		this.serviceTimes = serviceTimes;		
+		this.serviceTimes = serviceTimes;
 	}
 	
 	/**
